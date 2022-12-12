@@ -4,11 +4,13 @@ import pandas as pd
 from time import sleep
 import mysql.connector
 import envconfiguration as config
+from urllib.parse import quote
+
 
 def get_engine():
     string_connection = "mysql+pymysql://{user}:{password}@{host}:{port}/{database}".format(
         user=config.CAMUNDA_DOMAINS_USER,  # type: ignore
-        password=config.CAMUNDA_DOMAINS_PASS,  # type: ignore
+        password=quote(config.CAMUNDA_DOMAINS_PASS),  # type: ignore
         host=config.CAMUNDA_DOMAINS_HOST,  # type: ignore
         port=config.CAMUNDA_DOMAINS_PORT,  # type: ignore
         database=config.CAMUNDA_DOMAINS_DB  # type: ignore
@@ -19,7 +21,7 @@ def get_engine():
 def inserir_dados_bd_edital(ano,num_edital, escola_id):
     mydb = mysql.connector.connect(
         user=config.CAMUNDA_DOMAINS_USER,  # type: ignore
-        password=config.CAMUNDA_DOMAINS_PASS,  # type: ignore
+        password=quote(config.CAMUNDA_DOMAINS_PASS),  # type: ignore
         host=config.CAMUNDA_DOMAINS_HOST,  # type: ignore
         port=config.CAMUNDA_DOMAINS_PORT,  # type: ignore
         database=config.CAMUNDA_DOMAINS_DB  # type: ignore
@@ -39,7 +41,7 @@ def inserir_dados_tpo(num_edital_id, turmas_do_edital):
         
         mydb = mysql.connector.connect(
             user=config.CAMUNDA_DOMAINS_USER,  # type: ignore
-            password=config.CAMUNDA_DOMAINS_PASS,  # type: ignore
+            password=quote(config.CAMUNDA_DOMAINS_PASS),  # type: ignore
             host=config.CAMUNDA_DOMAINS_HOST,  # type: ignore
             port=config.CAMUNDA_DOMAINS_PORT,  # type: ignore
             database=config.CAMUNDA_DOMAINS_DB  # type: ignore
