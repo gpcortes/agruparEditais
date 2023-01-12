@@ -70,6 +70,9 @@ if __name__ == '__main__':
 
             turmas_planejadas = pd.read_sql_query("SELECT tpo.*, esc.escola, um.municipio, md.modalidade, tc.tipo, cr.curso from Turmas_planejado_orcado tpo inner JOIN escolas esc ON esc.id = tpo.escola_id left JOIN udepi_municipio um ON um.escola_id = esc.id INNER JOIN modalidade md ON md.id = tpo.modalidade_id INNER JOIN tipo_curso tc ON tc.id = tpo.tipo_curso_id INNER JOIN cursos cr ON cr.id = tpo.curso_id where tpo.num_edital_id = 0", con=get_engine())
 
+            if len(turmas_planejadas) == 0:
+                print('Não há turmas para gerar editais')
+                continue
             ano_do_edital = turmas_planejadas.groupby(by=['ano', 'escola_id', 'tipo', 'modalidade']).groups         
             listachaves = list(ano_do_edital.keys())
             for chave in listachaves:
