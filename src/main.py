@@ -78,7 +78,7 @@ if __name__ == '__main__':
 
         for task in tasks:
 
-            rede = task.variables['nomeRede'].value if 'nomeRede' in task.variables else continue
+            rede = task.variables['nomeRede'].value if 'nomeRede' in task.variables else None
             turmas_planejadas = pd.read_sql_query("SELECT tpo.*, esc.escola, um.municipio, md.modalidade, tc.tipo, cr.curso from Turmas_planejado_orcado tpo inner JOIN escolas esc ON esc.id = tpo.escola_id left JOIN udepi_municipio um ON um.escola_id = esc.id INNER JOIN modalidade md ON md.id = tpo.modalidade_id INNER JOIN tipo_curso tc ON tc.id = tpo.tipo_curso_id INNER JOIN cursos cr ON cr.id = tpo.curso_id where tpo.num_edital_id = 0", con=get_engine(rede))
 
             if len(turmas_planejadas) == 0:
