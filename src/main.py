@@ -8,11 +8,11 @@ from urllib.parse import quote
 
 
 def get_engine(rede):
+    if rede  == 'efg':
+        database = config.EFG_DOMAINS_DB
+    elif rede == 'cotec':
+        database = config.COTEC_DOMAINS_DB
     string_connection = "mysql+pymysql://{user}:{password}@{host}:{port}/{database}".format(
-        if rede  == 'efg':
-            database = config.EFG_DOMAINS_DB
-        elif rede == 'cotec':
-            database = config.COTEC_DOMAINS_DB
         user=config.CAMUNDA_DOMAINS_USER,  # type: ignore
         password=quote(config.CAMUNDA_DOMAINS_PASS),  # type: ignore
         host=config.CAMUNDA_DOMAINS_HOST,  # type: ignore
@@ -23,11 +23,11 @@ def get_engine(rede):
 
     
 def inserir_dados_bd_edital(ano,num_edital, escola_id, rede):
+    if rede  == 'efg':
+        database = config.EFG_DOMAINS_DB
+    elif rede == 'cotec':
+        database = config.COTEC_DOMAINS_DB
     mydb = mysql.connector.connect(
-        if rede  == 'efg':
-            database = config.EFG_DOMAINS_DB
-        elif rede == 'cotec':
-            database = config.COTEC_DOMAINS_DB
         user=config.CAMUNDA_DOMAINS_USER,  # type: ignore
         password=config.CAMUNDA_DOMAINS_PASS,  # type: ignore
         host=config.CAMUNDA_DOMAINS_HOST,  # type: ignore
@@ -46,14 +46,13 @@ def inserir_dados_bd_edital(ano,num_edital, escola_id, rede):
 
 def inserir_dados_tpo(num_edital_id, turmas_do_edital, rede):
     for i in turmas_do_edital:
-        
+        if rede  == 'efg':
+            database = config.EFG_DOMAINS_DB
+        elif rede == 'cotec':
+            database = config.COTEC_DOMAINS_DB   
         mydb = mysql.connector.connect(
-            if rede  == 'efg':
-                database = config.EFG_DOMAINS_DB
-            elif rede == 'cotec':
-            database = config.COTEC_DOMAINS_DB
             user=config.CAMUNDA_DOMAINS_USER,  # type: ignore
-            password=config.CAMUNDA_DOMAINS_PASS,  # type: ignore
+            password=config.CAMUNDA_DOMAINS_PA76SS,  # type: ignore
             host=config.CAMUNDA_DOMAINS_HOST,  # type: ignore
             port=config.CAMUNDA_DOMAINS_PORT,  # type: ignore
             database=database
