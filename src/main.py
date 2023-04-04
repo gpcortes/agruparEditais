@@ -8,6 +8,7 @@ from urllib.parse import quote
 
 
 def get_engine(rede):
+    database = None
     if rede  == 'efg':
         database = config.EFG_DOMAINS_DB
     elif rede == 'cotec':
@@ -23,6 +24,7 @@ def get_engine(rede):
 
     
 def inserir_dados_bd_edital(ano,num_edital, escola_id, rede):
+    database = None
     if rede  == 'efg':
         database = config.EFG_DOMAINS_DB
     elif rede == 'cotec':
@@ -45,18 +47,19 @@ def inserir_dados_bd_edital(ano,num_edital, escola_id, rede):
 
 
 def inserir_dados_tpo(num_edital_id, turmas_do_edital, rede):
+    database = None
+    if rede  == 'efg':
+        database = config.EFG_DOMAINS_DB
+    elif rede == 'cotec':
+        database = config.COTEC_DOMAINS_DB   
+    mydb = mysql.connector.connect(
+        user=config.CAMUNDA_DOMAINS_USER,  # type: ignore
+        password=config.CAMUNDA_DOMAINS_PA76SS,  # type: ignore
+        host=config.CAMUNDA_DOMAINS_HOST,  # type: ignore
+        port=config.CAMUNDA_DOMAINS_PORT,  # type: ignore
+        database=database
+    )
     for i in turmas_do_edital:
-        if rede  == 'efg':
-            database = config.EFG_DOMAINS_DB
-        elif rede == 'cotec':
-            database = config.COTEC_DOMAINS_DB   
-        mydb = mysql.connector.connect(
-            user=config.CAMUNDA_DOMAINS_USER,  # type: ignore
-            password=config.CAMUNDA_DOMAINS_PA76SS,  # type: ignore
-            host=config.CAMUNDA_DOMAINS_HOST,  # type: ignore
-            port=config.CAMUNDA_DOMAINS_PORT,  # type: ignore
-            database=database
-        )
         mycursor = mydb.cursor()
         sql = "UPDATE Turmas_planejado_orcado SET num_edital_id = {}  WHERE id = {}". format(str(num_edital_id), str(i))
         print(sql)
@@ -78,7 +81,7 @@ if __name__ == '__main__':
 
         for task in tasks:
 
-            rede = task.variables['nomeRede'].value if 'nomeRede' in task.variables else None
+            rede = task.variables['nome '].value if 'nomeRede' in task.variables else None
             turmas_planejadas = pd.read_sql_query("SELECT tpo.*, esc.escola, um.municipio, md.modalidade, tc.tipo, cr.curso from Turmas_planejado_orcado tpo inner JOIN escolas esc ON esc.id = tpo.escola_id left JOIN udepi_municipio um ON um.escola_id = esc.id INNER JOIN modalidade md ON md.id = tpo.modalidade_id INNER JOIN tipo_curso tc ON tc.id = tpo.tipo_curso_id INNER JOIN cursos cr ON cr.id = tpo.curso_id where tpo.num_edital_id = 0", con=get_engine(rede))
 
             if len(turmas_planejadas) == 0:
