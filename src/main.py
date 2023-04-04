@@ -8,6 +8,7 @@ from urllib.parse import quote
 
 
 def get_engine(rede):
+    print(rede)
     database = None
     if rede  == 'efg':
         database = config.EFG_DOMAINS_DB
