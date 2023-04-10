@@ -45,15 +45,15 @@ RUN pipenv install --system
 
 # Creates a non-root user with an explicit UID and adds permission to access the /app folder
 # For more info, please refer to https://aka.ms/vscode-docker-python-configure-containers
-RUN adduser -u $UID --disabled-password --gecos "" $USER_NAME && chown -R $USER_NAME /home/$USER_NAME
+RUN adduser -u $APP_UID --disabled-password --gecos "" $APP_USER_NAME && chown -R $APP_USER_NAME /home/$APP_USER_NAME
 
-WORKDIR /home/$USER_NAME
-# COPY ./app /home/$USER_NAME
+WORKDIR /home/$APP_USER_NAME
+# COPY ./app /home/$APP_USER_NAME
 
-# RUN chown -R $USER_NAME:$USER_NAME /home/$USER_NAME
-USER $USER_NAME
-# RUN mkdir /home/$USER_NAME/templates
-# RUN mkdir /home/$USER_NAME/outputs
+# RUN chown -R $APP_USER_NAME:$APP_USER_NAME /home/$APP_USER_NAME
+USER $APP_USER_NAME
+# RUN mkdir /home/$APP_USER_NAME/templates
+# RUN mkdir /home/$APP_USER_NAME/outputs
 
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
 

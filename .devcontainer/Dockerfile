@@ -34,18 +34,18 @@ RUN /usr/local/bin/python -m pip install --upgrade pip
 
 ENV PIPENV_VENV_IN_PROJECT=True
 ENV PIPENV_SITE_PACKAGES=True
-ENV PATH="/home/$USER_NAME/$APP_NAME/.venv/bin:$PATH"
+ENV PATH="/home/$APP_USER_NAME/$APP_NAME/.venv/bin:$PATH"
 
 RUN pip install pipenv
 
 # Creates a non-root user with an explicit UID and adds permission to access the /app folder
 # For more info, please refer to https://aka.ms/vscode-docker-python-configure-containers
-RUN adduser -u $UID --disabled-password --gecos "" $USER_NAME && chown -R $USER_NAME /home/$USER_NAME
+RUN adduser -u $APP_UID --disabled-password --gecos "" $APP_USER_NAME && chown -R $APP_USER_NAME /home/$APP_USER_NAME
 
-WORKDIR /home/$USER_NAME
-# COPY ./app /home/$USER_NAME
+WORKDIR /home/$APP_USER_NAME
+# COPY ./app /home/$APP_USER_NAME
 
-USER $USER_NAME
-# RUN chown -R $USER_NAME:$USER_NAME /home/$USER_NAME
+USER $APP_USER_NAME
+# RUN chown -R $APP_USER_NAME:$APP_USER_NAME /home/$APP_USER_NAME
 
 CMD [ "tail", "-f", "/dev/null" ]
