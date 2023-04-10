@@ -6,6 +6,10 @@ services:
         build:
             context: .
             dockerfile: ./Dockerfile
+            args:
+            - USER_NAME=${APP_USER_NAME}
+            - GID=${APP_UID}
+            - UID=${APP_GID}
         environment:
             - NODE_ENV=production
             - TOPIC=agrupamento_de_edital
@@ -21,7 +25,7 @@ services:
             - EFG_DOMAINS_DB=${EFG_DOMAINS_DB}
             - COTEC_DOMAINS_DB=${COTEC_DOMAINS_DB}
         volumes:
-            - ./src:/home/python/app
+            - ./src:/home/{APP_USER_NAME}/${APP_USER_NAME}
 
 networks:
   default:

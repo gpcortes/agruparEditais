@@ -15,8 +15,10 @@ mysql-connector-python = "*"
 pycamunda = "*"
 
 [dev-packages]
-pylint = "*"
-yapf = "*"
+autopep8 = "*"
+djlint = "*"
+pylama = "*"
+pylance = "*"
 
 [requires]
-python_version = "3.7"
+python_version = "3.8"

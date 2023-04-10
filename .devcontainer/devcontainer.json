@@ -17,15 +17,26 @@
 
 	// The optional 'workspaceFolder' property is the path VS Code should open by default when
 	// connected. This is typically a file mount in .devcontainer/docker-compose.yml
-	"workspaceFolder": "/home/python/app",
-	"extensions": [
-		"ms-python.python",
-		"ms-azuretools.vscode-docker",
-		"EditorConfig.EditorConfig"
-	],
-
+	"workspaceFolder": "/home/${localEnv:APP_USER_NAME}/app",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "donjayamanne.python-extension-pack",
+                "ms-python.vscode-pylance",
+                "batisteo.vscode-django",
+                "ms-azuretools.vscode-docker",
+                "EditorConfig.EditorConfig",
+                "ecmel.vscode-html-css",
+                "monosans.djlint",
+                "AnbuselvanRocky.bootstrap5-vscode",
+                "ms-vsliveshare.vsliveshare"
+            ]
+        }
+    },
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [],
+	"forwardPorts": [
+        8000
+    ],
 
 	// Uncomment the next line if you want start specific services in your Docker Compose config.
 	// "runServices": [],
@@ -34,8 +45,9 @@
 	// "shutdownAction": "none",
 
 	// Uncomment the next line to run commands after the container is created - for example installing curl.
-	"postCreateCommand": "pipenv sync"
-
+    "postCreateCommand": "pipenv install && pipenv install --dev",
+    
 	// Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
-	// "remoteUser": "vscode"
+	"remoteUser": "${localEnv:APP_USER_NAME}"
+
 }
