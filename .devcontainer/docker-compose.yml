@@ -21,10 +21,10 @@ services:
       context: .
       dockerfile: .devcontainer/Dockerfile
       args:
-        - USER_NAME=${APP_USER_NAME}
-        - GID=${APP_UID}
-        - UID=${APP_GID}
-        - APPNANE=${APP_NAME}
+        - APP_USER_NAME=${APP_USER_NAME}
+        - APP_UID=${APP_UID}
+        - APP_GID=${APP_GID}
+        - APP_NANE=${APP_NAME}
 
     volumes:
       # Update this to wherever you want VS Code to mount the folder of your project

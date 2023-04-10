@@ -7,9 +7,9 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # Turns off buffering for easier container logging
 ENV PYTHONUNBUFFERED=1
 
-ARG USER_NAME
-ARG UID
-ARG GID
+ARG APP_USER_NAME
+ARG APP_UID
+ARG APP_GID
 
 #Set the locale
 RUN apt update && apt dist-upgrade -y
