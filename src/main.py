@@ -38,8 +38,8 @@ def inserir_dados_bd_edital(ano, num_edital, escola_id, rede):
     )
 
     mycursor = mydb.cursor()
-    sql = "INSERT INTO edital_ensino (num_edital,ano, escola_id) VALUES (%s, %s, %s)"
-    val = (int(num_edital), int(ano), int(escola_id))
+    sql = "INSERT INTO edital_ensino (num_edital,ano, escola_id, status) VALUES (%s, %s, %s, %s)"
+    val = (int(num_edital), int(ano), int(escola_id), 0)
     mycursor.execute(sql, val)
     mydb.commit()
     num_edital = mycursor.lastrowid
