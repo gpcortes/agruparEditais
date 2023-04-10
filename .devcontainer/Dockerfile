@@ -8,7 +8,7 @@ ENV PYTHONUNBUFFERED=1
 ARG USER_NAME
 ARG UID
 ARG GID
-ARG APPNAME
+ARG APP_NAME
 
 
 #Set the locale
@@ -34,7 +34,7 @@ RUN /usr/local/bin/python -m pip install --upgrade pip
 
 ENV PIPENV_VENV_IN_PROJECT=True
 ENV PIPENV_SITE_PACKAGES=True
-ENV PATH="/home/$USERNAME/$APPNAME/.venv/bin:$PATH"
+ENV PATH="/home/$USER_NAME/$APP_NAME/.venv/bin:$PATH"
 
 RUN pip install pipenv
 
