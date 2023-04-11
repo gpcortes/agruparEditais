@@ -68,7 +68,7 @@ def inserir_dados_tpo(num_edital_id, turmas_do_edital, rede):
         mydb.commit()
         num_edital = mycursor.lastrowid
         print(i)
-        sleep(5)
+        # sleep(5)
     return print("Dados Inseridos com Sucesso!")
 
 
