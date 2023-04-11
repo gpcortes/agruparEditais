@@ -54,7 +54,7 @@ def inserir_dados_tpo(num_edital_id, turmas_do_edital, rede):
         database = config.COTEC_DOMAINS_DB
     mydb = mysql.connector.connect(
         user=config.CAMUNDA_DOMAINS_USER,  # type: ignore
-        password=config.CAMUNDA_DOMAINS_PA76SS,  # type: ignore
+        password=config.CAMUNDA_DOMAINS_PASS,  # type: ignore
         host=config.CAMUNDA_DOMAINS_HOST,  # type: ignore
         port=config.CAMUNDA_DOMAINS_PORT,  # type: ignore
         database=database
