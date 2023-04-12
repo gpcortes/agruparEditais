@@ -116,7 +116,7 @@ if __name__ == '__main__':
                 num_edital_id = inserir_dados_bd_edital(
                     ano, num_edital, escolaId, rede)
                 inserir_dados_tpo(num_edital_id, turmas_do_edital, rede)
-                sleep(5)
+                # sleep(5)
 
             worker.complete_task(task_id=task.id_, variables={})
             print('Inserção realizada com sucesso!')
