@@ -38,7 +38,7 @@ def inserir_dados_bd_edital(ano, num_edital, escola_id, rede):
     )
 
     mycursor = mydb.cursor()
-    sql = "INSERT INTO edital_ensino (num_edital,ano, escola_id, status) VALUES (%s, %s, %s, %s)"
+    sql = "INSERT INTO edital_ensino (num_edital,ano, escola_id, status, user_change_id) VALUES (%s, %s, %s, %s, NULL)"
     val = (int(num_edital), int(ano), int(escola_id), 0)
     mycursor.execute(sql, val)
     mydb.commit()
