@@ -29,8 +29,3 @@ services:
             - COTEC_DOMAINS_DB=${COTEC_DOMAINS_DB}
         volumes:
             - ./src:/home/${APP_USER_NAME}/${APP_NAME}
-
-networks:
-  default:
-    external: true
-    name: backend
