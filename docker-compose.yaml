@@ -28,7 +28,7 @@ services:
             - EFG_DOMAINS_DB=${EFG_DOMAINS_DB}
             - COTEC_DOMAINS_DB=${COTEC_DOMAINS_DB}
         volumes:
-            - ./src:/home/${APP_USER_NAME}
+            - ./src:/home/${APP_USER_NAME}/${APP_NAME}
 
 networks:
   default:

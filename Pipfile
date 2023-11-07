@@ -13,6 +13,7 @@ caworker = "*"
 pymysql = "*"
 mysql-connector-python = "*"
 pycamunda = "*"
+numpy = "*"
 
 [dev-packages]
 autopep8 = "*"
