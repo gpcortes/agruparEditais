@@ -37,7 +37,7 @@ ADD Pipfile ./
 
 RUN if [ -s Pipfile.lock ]; then pipenv install --system; else pipenv lock && pipenv install --system; fi
 
-WORKDIR /home/$APP_USER_NAME
+WORKDIR /home/$APP_USER_NAME/$APP_NAME
 USER $APP_USER_NAME
 
 CMD [ "python", "main.py" ]
