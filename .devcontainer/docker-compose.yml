@@ -21,17 +21,14 @@ services:
       context: .
       dockerfile: .devcontainer/Dockerfile
       args:
-        - APP_USER_NAME=${APP_USER_NAME}
-        - APP_UID=${APP_UID}
-        - APP_GID=${APP_GID}
-        - APP_NANE=${APP_NAME}
+        APP_NAME: app
+        APP_USER_NAME: vscode
 
     volumes:
       # Update this to wherever you want VS Code to mount the folder of your project
-      - .:/home/${APP_USER_NAME}/${APP_NAME}:cached
-      - ./.devcontainer/.zshrc:/home/${APP_USER_NAME}/.zshrc:rw
-      - ./.devcontainer/.antigenrc:/home/${APP_USER_NAME}/.antigenrc:rw
-      - ./.devcontainer/.p10k.zsh:/home/${APP_USER_NAME}/.p10k.zsh:rw
+      - .:/home/vscode/app:cached
+      - ./.devcontainer/.zshrc:/home/vscode/.zshrc:rw
+      - ./.devcontainer/.p10k.zsh:/home/vscode/.p10k.zsh:rw
       - /var/run/docker.sock:/var/run/docker.sock 
 
     environment:
