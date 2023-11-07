@@ -19,6 +19,3 @@ autopep8 = "*"
 djlint = "*"
 pylama = "*"
 pylance = "*"
-
-[requires]
-python_version = "3.8"

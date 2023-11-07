@@ -7,9 +7,12 @@ services:
             context: .
             dockerfile: ./Dockerfile
             args:
-            - APP_USER_NAME=${APP_USER_NAME}
-            - APP_UID=${APP_UID}
-            - APP_GID=${APP_GID}
+                IMAGE_NAME: ${APP_IMAGE_NAME}
+                IMAGE_TAG: ${APP_IMAGE_TAG}
+                APP_USER_NAME: ${APP_USER_NAME}
+                APP_NAME: ${APP_NAME}
+                APP_UID: ${APP_UID}
+                APP_GID: ${APP_GID}
         environment:
             - NODE_ENV=production
             - TOPIC=agrupamento_de_edital
