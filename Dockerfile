@@ -37,8 +37,6 @@ ADD Pipfile ./
 
 RUN if [ -s Pipfile.lock ]; then pipenv install --system; else pipenv lock && pipenv install --system; fi
 
-RUN adduser -u $APP_UID --disabled-password --gecos "" $APP_USER_NAME && chown -R $APP_USER_NAME /home/$APP_USER_NAME
-
 WORKDIR /home/$APP_USER_NAME
 USER $APP_USER_NAME
 
