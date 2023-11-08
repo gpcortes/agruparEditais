@@ -1,5 +1,7 @@
 version: '3'
 
+name: ${PROJECT_NAME}-${APP_NAME}
+
 services:
     app:
         restart: always
@@ -29,3 +31,8 @@ services:
             - COTEC_DOMAINS_DB=${COTEC_DOMAINS_DB}
         volumes:
             - ./src:/home/${APP_USER_NAME}/${APP_NAME}
+
+networks:
+    default:
+        external: true
+        name: maestro-ensino-network
