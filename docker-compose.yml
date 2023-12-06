@@ -1,0 +1,50 @@
+version: '3'
+
+name: ${PROJECT_NAME}-${APP_NAME}
+
+services:
+    app:
+        container_name: ${DJ_HOST}
+        restart: always
+        build:
+            context: .
+            dockerfile: ./Dockerfile
+            args:
+                IMAGE_NAME: ${DJ_IMAGE_NAME}
+                IMAGE_TAG: ${DJ_IMAGE_TAG}
+                APP_USER_NAME: ${APP_USER_NAME}
+                APP_NAME: ${APP_NAME}
+                APP_UID: ${APP_UID}
+                APP_GID: ${APP_GID}
+        environment:
+            DJANGO_DEBUG: ${DJANGO_DEBUG}
+            NODE_ENV: production
+            TOPIC: agrupamento_de_edital
+            ENG_REST_URL: ${CAMUNDA_URL}
+            ENG_REST_USERNAME: ${CAMUNDA_USERNAME}
+            ENG_REST_PASSWORD: ${CAMUNDA_PASSWORD}
+            MAX_TASK_DURATION: 30000
+            CAMUNDA_URL: ${CAMUNDA_URL}
+            DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY}
+            EFG_DOMAINS_HOST: ${EFG_DOMAINS_HOST}
+            EFG_DOMAINS_PORT: ${EFG_DOMAINS_PORT}
+            EFG_DOMAINS_USER: ${EFG_DOMAINS_USER}
+            EFG_DOMAINS_DB: ${EFG_DOMAINS_DB}
+            EFG_DOMAINS_PASS: ${EFG_DOMAINS_PASS}
+            COTEC_DOMAINS_HOST: ${COTEC_DOMAINS_HOST}
+            COTEC_DOMAINS_PORT: ${COTEC_DOMAINS_PORT}
+            COTEC_DOMAINS_USER: ${COTEC_DOMAINS_USER}
+            COTEC_DOMAINS_DB: ${COTEC_DOMAINS_DB}
+            COTEC_DOMAINS_PASS: ${COTEC_DOMAINS_PASS}
+            PRIMARY_DOMAIN_NAME: ${PRIMARY_DOMAIN_NAME}
+        env_file:
+            - ./${APP_CONFIG_DIR}/${DJ_NAME}/${DJ_NAME}.env
+            - .env
+        volumes:
+            - ./src:/home/${APP_USER_NAME}/${APP_NAME}
+            - /usr/share/zoneinfo/America/Sao_Paulo:/etc/localtime:ro
+
+networks:
+    default:
+        external: true
+        name: maestro-ensino-network

@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  deploy:
+    image: debian:bullseye
+    restart: "no"
+    user: 'root'
+    group_add:
+      - '${APP_GID}'
+    env_file:
+      - deploy.env
+    entrypoint: /root/${APP_NAME}/${APP_CONFIG_DIR}/entrypoint.sh
+    volumes:
+      - ../:/root/${APP_NAME}:rw
+      - /usr/share/zoneinfo/America/Sao_Paulo:/etc/localtime:ro

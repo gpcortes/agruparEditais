@@ -4,11 +4,8 @@ ARG IMAGE_TAG
 FROM $IMAGE_NAME:$IMAGE_TAG
 
 ENV LANG pt_BR.UTF-8
-ENV LANGUAGE pt_BR.UTF-8
 ENV LC_ALL pt_BR.UTF-8
-ENV LC_CTYPE pt_BR.UTF-8
-ENV LC_TIME pt_BR.UTF-8
-
+ENV LANGUAGE pt_BR.UTF-8
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONFAULTHANDLER 1
 ENV PYTHONUNBUFFERED 1
@@ -21,6 +18,11 @@ ARG APP_NAME
 RUN adduser -u $APP_UID --disabled-password --gecos "" $APP_USER_NAME && chown -R $APP_USER_NAME /home/$APP_USER_NAME
 
 RUN apt-get update && apt-get install git -y
+# RUN apt-get update && libodbc1 -y
+# RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+# RUN curl https://packages.microsoft.com/config/debian/10/prod.list > /etc/apt/sources.list.d/mssql-release.list
+
+# RUN apt-get update && ACCEPT_EULA=Y apt-get install -y msodbcsql17:
 
 RUN pip install pipenv
 
@@ -30,14 +32,18 @@ RUN sed -i '/pt_BR.UTF-8/s/^#//g' /etc/locale.gen \
     && dpkg-reconfigure --frontend noninteractive locales \
     && update-locale LANG=pt_BR.UTF-8 LANGUAGE=pt_BR.UTF-8 LC_ALL=pt_BR.UTF-8
 
-RUN /usr/local/bin/python -m pip install --upgrade pip
+ENV PIPENV_VENV_IN_PROJECT=1
+ENV PIPENV_SITE_PACKAGES=1
+ENV PATH "/home/$APP_USER_NAME/$APP_NAME/.venv/bin:$PATH"
 
-ADD Pipfile.lock ./
 ADD Pipfile ./
+ADD Pipfile.lock ./
 
 RUN if [ -s Pipfile.lock ]; then pipenv install --system; else pipenv lock && pipenv install --system; fi
 
-WORKDIR /home/$APP_USER_NAME/$APP_NAME
 USER $APP_USER_NAME
 
+WORKDIR /home/$APP_USER_NAME/$APP_NAME
+
 CMD [ "python", "main.py" ]
+# CMD ["tail", "-f", "/dev/null"]

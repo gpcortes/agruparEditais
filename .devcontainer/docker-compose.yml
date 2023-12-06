@@ -1,7 +1,8 @@
 version: '3'
+name: ${PROJECT_NAME}-${APP_NAME}
 services:
   # Update this to the name of the service you want to work with in your docker-compose.yml file
-  
+
   app:
     # If you want add a non-root user to your Dockerfile, you can use the "remoteUser"
     # property in devcontainer.json to cause VS Code its sub-processes (terminals, tasks, 
@@ -17,6 +18,7 @@ services:
     # docker-compose.yml file (the first in the devcontainer.json "dockerComposeFile"
     # array). The sample below assumes your primary file is in the root of your project.
     #
+
     build:
       context: .
       dockerfile: .devcontainer/Dockerfile
@@ -29,11 +31,12 @@ services:
       - .:/home/vscode/app:cached
       - ./.devcontainer/.zshrc:/home/vscode/.zshrc:rw
       - ./.devcontainer/.p10k.zsh:/home/vscode/.p10k.zsh:rw
+
+      # Uncomment the next line to use Docker from inside the container. See https://aka.ms/vscode-remote/samples/docker-from-docker-compose for details.
       - /var/run/docker.sock:/var/run/docker.sock 
 
     environment:
       DJANGO_DEBUG: True
-    
     # Uncomment the next four lines if you will use a ptrace-based debugger like C++, Go, and Rust.
     # cap_add:
     #   - SYS_PTRACE
@@ -41,4 +44,4 @@ services:
     #   - seccomp:unconfined
 
     # Overrides default command so things don't shut down after the process ends.
-    # command: /bin/sh -c "while sleep 1000; do :; done"
+    # command: /bin/sh -c "while sleep 1000; do :; done"  

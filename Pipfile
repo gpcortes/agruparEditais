@@ -12,8 +12,8 @@ docx2pdf = "*"
 caworker = "*"
 pymysql = "*"
 mysql-connector-python = "*"
-pycamunda = "*"
 numpy = "*"
+pycamunda = "*"
 
 [dev-packages]
 autopep8 = "*"
