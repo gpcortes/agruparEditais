@@ -87,4 +87,5 @@
     "[twig]": {
         "editor.defaultFormatter": "monosans.djlint"
     },
+    "GitHooks.hooksDirectory": "/home/gpcortes/projects/agruparEditais/.git/hooks",
 }

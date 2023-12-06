@@ -28,10 +28,10 @@ services:
 
     volumes:
       # Update this to wherever you want VS Code to mount the folder of your project
-      - .:/home/${APP_USER_NAME}/${APP_NAME}:cached
-      - ./.devcontainer/.zshrc:/home/${APP_USER_NAME}/.zshrc:rw
-      - ./.devcontainer/.antigenrc:/home/${APP_USER_NAME}/.antigenrc:rw
-      - ./.devcontainer/.p10k.zsh:/home/${APP_USER_NAME}/.p10k.zsh:rw
+      - .:/home/appuser/app:cached
+      - ./.devcontainer/.zshrc:/home/appuser/.zshrc:rw
+      - ./.devcontainer/.antigenrc:/home/appuser/.antigenrc:rw
+      - ./.devcontainer/.p10k.zsh:/home/appuser/.p10k.zsh:rw
       - /var/run/docker.sock:/var/run/docker.sock 
 
     environment:
