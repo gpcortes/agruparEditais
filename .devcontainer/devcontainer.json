@@ -17,7 +17,7 @@
 
 	// The optional 'workspaceFolder' property is the path VS Code should open by default when
 	// connected. This is typically a file mount in .devcontainer/docker-compose.yml
-	"workspaceFolder": "/home/appuser/app",
+    "workspaceFolder": "/home/vscode/app",
     "customizations": {
         "vscode": {
             "extensions": [
@@ -45,10 +45,9 @@
 	// "shutdownAction": "none",
 
 	// Uncomment the next line to run commands after the container is created - for example installing curl.
-    "postCreateCommand": "pipenv install && pipenv install --dev",
+    "postCreateCommand": "if [ -s Pipfile.lock ]; then pipenv install --system; else pipenv lock && pipenv install --system; fi",
     
 	// Uncomment to connect as a non-root user if you've added one. See https://aka.ms/vscode-remote/containers/non-root.
-	"remoteUser": "${localEnv:APP_USER_NAME}",
-    "updateRemoteUserUID": false
-
+    "remoteUser": "vscode",
+	"updateRemoteUserUID": true
 }

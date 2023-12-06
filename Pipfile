@@ -13,12 +13,10 @@ caworker = "*"
 pymysql = "*"
 mysql-connector-python = "*"
 pycamunda = "*"
+numpy = "*"
 
 [dev-packages]
 autopep8 = "*"
 djlint = "*"
 pylama = "*"
 pylance = "*"
-
-[requires]
-python_version = "3.8"

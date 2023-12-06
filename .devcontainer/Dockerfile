@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/vscode/devcontainers/python:3.8-bullseye
+FROM mcr.microsoft.com/vscode/devcontainers/python:3.10-bullseye
 
 ENV PYTHONDONTWRITEBYTECODE=1
 
@@ -22,7 +22,6 @@ RUN sed -i '/pt_BR.UTF-8/s/^#//g' /etc/locale.gen \
     && dpkg-reconfigure locales \
     && update-locale LANG=pt_BR.UTF-8 LANGUAGE=pt_BR.UTF-8 LC_ALL=pt_BR.UTF-8
 ENV LANG pt_BR.UTF-8  
-ENV LANGUAGE pt_BR:pt  
 ENV LC_ALL pt_BR.UTF-8
 ENV LC_CTYPE pt_BR.UTF-8
 ENV LC_TIME pt_BR.UTF-8
@@ -40,7 +39,6 @@ RUN pip install pipenv
 
 # Creates a non-root user with an explicit UID and adds permission to access the /app folder
 # For more info, please refer to https://aka.ms/vscode-docker-python-configure-containers
-RUN adduser -u $APP_UID --disabled-password --gecos "" $APP_USER_NAME && chown -R $APP_USER_NAME /home/$APP_USER_NAME
 
 WORKDIR /home/$APP_USER_NAME
 # COPY ./app /home/$APP_USER_NAME
